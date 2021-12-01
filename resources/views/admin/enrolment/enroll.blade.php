@@ -103,9 +103,9 @@
                     <h5 class="modal-title" id="exampleModalLabel">STUDENT DETAILS</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
-                  <form class="forms-sample" action="{{ route('add.course') }}" method="post">
+                  <div class="forms-sample" >
                     {{ csrf_field() }}
-                  <div class="modal-body">
+                  <div class="modal-body" id="printbody">
                     
                           <div class="container-fluid d-flex justify-content-between">
                             <div class="col-lg-3 pl-0">
@@ -113,16 +113,10 @@
                               <p>104,<br>Minare SK,<br>Canada, K1A 0G9.</p>
                             </div>
                             <div class="col-lg-3 pr-0">
-                              <p class="mt-5 mb-2 text-end"><b>Invoice to</b></p>
-                              <p class="text-end">Gaala & Sons,<br> C-201, Beykoz-34800,<br> Canada, K1A 0G9.</p>
+                              <img src="{{ asset('template/logopnp/logo.png') }}" alt="" width="100px">
                             </div>
                           </div>
-                          <div class="container-fluid d-flex justify-content-between">
-                            <div class="col-lg-3 pl-0">
-                              <p class="mb-0 mt-5">Invoice Date : 23rd Jan 2016</p>
-                              <p>Due Date : 25th Jan 2017</p>
-                            </div>
-                          </div>
+                          
                           <div class="container-fluid mt-5 d-flex justify-content-center w-100">
                             <div class="table-responsive w-100">
                                 <table class="table" id="training">
@@ -174,10 +168,10 @@
                             
                   </div>
                   <div class="modal-footer">
-                  <a href="#" class="btn btn-primary float-right mt-4 ms-2"><i class="mdi mdi-printer me-1"></i>Print</a>
+                  <a class="btn btn-primary float-right mt-4 ms-2" href="{{ route('print.enrollment') }}" target="_blank"><i class="mdi mdi-printer me-1" ></i>Print</a>
                             <a href="#" class="btn btn-success float-right mt-4"><i class="mdi mdi-keyboard-backspace me-1"></i>Back</a>
                   </div>
-                    </form>
+                    </div>
                 </div>
               </div>
             </div>
@@ -197,6 +191,7 @@
           <script type="text/javascript">
              var count = 1;
              var course_id = [];
+
               $(document).ready(function() {
                window.addEventListener('beforeunload', 
                                 function (e) {
@@ -212,6 +207,7 @@
                 e.returnValue = '';
             }
         });
+              
               $('#example').dataTable({
                   "lengthChange": false,
                   "bInfo": false, // hide showing entries
@@ -229,14 +225,12 @@
 
                 var id = this.id.split("_");
                 user_no = id[1];
-                alert()
+           
                
               })
                  $('#submitenroll').on('submit', function(event){
                   event.preventDefault();
                     var formData = new FormData(this);
-
-                   
                      $.ajax({
                       url:"{{ route('enrollment.add',$entities->id) }}",
                       method:"post",
@@ -255,6 +249,9 @@
                         course_id.length = 0;
                          html = "";
                          $('#selectedcourse').html(html);
+                          $('#enrolbtn').attr('disabled',false);
+                        
+
 
                       }
                       })
@@ -264,11 +261,21 @@
 
              });
 
-             
+  
 
  function gotocourse(id){
   alert(id);
  }
+ function printDiv(){
+
+    var $this = $(this);
+   
+    var printArea = $this.parents('#printbody').html();
+
+    $('body').html(printArea);
+    window.print();
+    $('body').html(originalContent);
+}
 
  function dynamic_field(number,user_no)
  { 
@@ -299,7 +306,7 @@ if(result){
      success:function(data)
      {
        html = '<tr id="ke'+data.id+'" class="key">';
-        html += '<td><input type="" name="course_id[]" value="'+data.id+'">'+data.name+'</td>';
+        html += '<td><input type="hidden" name="course_id[]" value="'+data.id+'">'+data.name+'</td>';
         html += '<td><input type="text" name="birthday[]" class="form-control" place="Birthday" value="'+data.id+'"/></td>';
         if(number > 1)
         {

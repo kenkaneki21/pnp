@@ -12,8 +12,14 @@
           </a>
         </li>
         <li class="nav-item sidebar-category">
-          <p>Components</p>
+          <p>Menu</p>
           <span></span>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('enroll.student') }}">
+            <i class="mdi mdi-account-search menu-icon"></i>
+            <span class="menu-title">Enroll</span>
+          </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">

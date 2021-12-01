@@ -38,7 +38,7 @@
                         <tr>
                           <th>ID</th>
                           <th>Full Name</th>
-                          <th>Address</th>
+                          <th>Entity Type</th>
                           <th>Contact</th>
                           <th>Action</th>
                         </tr>
@@ -55,21 +55,36 @@
                              @endif
                            </td>
                             <td style="padding: 1rem 0.9375rem;">{{ $entity->f_name}} {{ $entity->m_name}} {{ $entity->l_name}} </td>
-                            <td style="padding: 1rem 0.9375rem;">   </td>
+                            <td style="padding: 1rem 0.9375rem;">
+                              @if($entity->entity_type == 1)
+                              <label class="badge badge-success">Student</label>
+                              @else
+                              <label class="badge badge-info">Teacher</label>
+                              @endif
+
+                            </td>
                             <td style="padding: 1rem 0.9375rem;">
                                  
                             </td>
-                            <td style="padding: 1rem 0.9375rem;"><a href="{{ url('entity/enroll/'.$entity->id)}}" class="btn btn-primary btn-sm">Enroll</a> <a href="{{ url('entity/profile/'.$entity->id)}}" class="btn btn-info btn-sm">View</a>
+                            <td style="padding: 1rem 0.9375rem;"><a href="{{ url('entity/profile/'.$entity->id)}}" class="btn btn-info btn-sm">View</a>
                             <a href="{{ url('entity/delete/'.$entity->id)}}" onclick="return confirm('Are you sure to delete')"  class="btn btn-danger btn-sm">Delete</a>
                             </td>
                             </tr>
                             @endforeach
                       </tbody>
                     </table>
-                    @if($markings == 1)
+                    <nav>
+                    <ul class="pagination d-flex flex-wrap justify-content-end pagination-danger">
+                    
+                      @if($markings == 1)
                      {{ $entities->links() }} 
-                     @endif
+                     @endif 
+                       
+                    </ul>
+                  </nav>
+                   
                   </div>
+
                 </div>
               </div>
             </div>

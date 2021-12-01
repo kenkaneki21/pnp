@@ -78,6 +78,11 @@ Route::post('/user/add',[UserController::class,'CreateUser'])->name('user.add');
 // Enrollment Controller
 Route::get('/entity/enroll/{id}',[EnrollmentController::class,'index'])->name('enrollment');
 Route::post('/entity/recordenroll/{id}',[EnrollmentController::class,'EnrollEntity'])->name('enrollment.add');
+Route::get('/entity/print',[EnrollmentController::class,'printer1'])->name('print.enrollment');
+Route::get('/entity/print2',[EnrollmentController::class,'printer2'])->name('print.enrollment');
+Route::get('/enroll',[EnrollmentController::class,'enroll'])->name('enroll.student');
+Route::post('/student/search',[EnrollmentController::class,'searchstudent'])->name('student.search');
+
  
 
 
