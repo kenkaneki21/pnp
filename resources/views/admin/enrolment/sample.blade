@@ -10,33 +10,8 @@
                       <p class="card-title">Courses</p>
                       <p class="text-muted">Showing of total number of student per Course</p>
                       <div class="table-responsive">
-                      <table class="table table-hover" id="studentresult">
-                      <thead>
-                      
-                        <tr>
-                           
-                          <th>Name</th>
-                          <th>Enrolled</th>
-                           <th>Action</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                         
-                             @foreach($courses as $course)
-                            <tr>
-                             
-                            <td>{{ $course->name}} </td>
-                            <td>   <label class="badge badge-success">{{ $course->total}}</label></td>
-                            <td>
-                               <button class="btn btn-xs "><i class="mdi mdi-eye text-danger"></i></button>  
-                            </td>
-                             
-                            </tr>
-                            @endforeach
-                      
-                      </tbody>
-                    </table>
-                      </div>
+                     
+                  </div>
                       
                        
                     </div>
@@ -51,8 +26,7 @@
                 <div class="col-md-12 grid-margin stretch-card">
                   <div class="card">
                     <div class="card-body">
-                     
-                       <p class="card-title">Search Student</p>
+                      <p class="card-title">Search Student</p>
                       <form action="{{ route('student.search') }}" method="post">
                       {{ csrf_field() }}
                       <div class="input-group col-xs-12">
@@ -65,7 +39,7 @@
                         
                       </div>
                        </form><hr>
-                       <div class="table-responsive">
+                      <div class="table-responsive">
                      <table class="table table-hover" id="studentresult">
                       <thead>
                         <tr class="bg-dark text-white">
@@ -103,10 +77,8 @@
                       </tbody>
                     </table>
                   </div>
-                       
-                     
 
-                     </div>
+                     
                   </div>
                 </div>
                 

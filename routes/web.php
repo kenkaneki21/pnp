@@ -6,6 +6,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EnrollmentController;
+use App\Models\Course;
+use App\Models\Entity;
 
 
 /*
@@ -25,7 +27,8 @@ use App\Http\Controllers\EnrollmentController;
 	 
 
 
-    return view('admin.course.sample3');
+    $latest = Entity::where('entity_type','=','1');
+    return $latest;
 });
  
  Route::get('/dynamic', function () {
@@ -74,6 +77,8 @@ Route::get('/course/getbyid/{id}',[CourseController::class,'GetCoursebyId'])->na
 
 Route::get('/users',[UserController::class,'index'])->name('user.record');
 Route::post('/user/add',[UserController::class,'CreateUser'])->name('user.add');
+Route::get('/course/resetpass/{id}',[UserController::class,'ResetPass']);
+
  
 // Enrollment Controller
 Route::get('/entity/enroll/{id}',[EnrollmentController::class,'index'])->name('enrollment');
@@ -88,6 +93,27 @@ Route::post('/student/search',[EnrollmentController::class,'searchstudent'])->na
 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
+	$latest = Entity::latest()->get();
+   $newlatest = $latest->count();
+	$students = Entity::where('entity_type','=','1')->get();
+   $student = $students->count();
+   $instructors = Entity::where('entity_type','=','2')->get();
+   $instructor = $instructors->count();
+   $courses = Course::get();
+   $course = $courses->count();
+
+    return view('dashboard',compact('newlatest','student','instructor','course'));
+})->name('dashboard');
+Route::middleware(['auth:sanctum', 'verified'])->get('/', function () {
+  $latest = Entity::latest()->get();
+   $newlatest = $latest->count();
+  $students = Entity::where('entity_type','=','1')->get();
+   $student = $students->count();
+   $instructors = Entity::where('entity_type','=','2')->get();
+   $instructor = $instructors->count();
+   $courses = Course::get();
+   $course = $courses->count();
+
+    return view('dashboard',compact('newlatest','student','instructor','course'));
 })->name('dashboard');
 Route::get('logout',[EntityController::class,'Logout']);

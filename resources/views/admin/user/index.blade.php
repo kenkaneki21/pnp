@@ -59,9 +59,9 @@
                    <table class="table">
                       <thead>
                         <tr>
-                          <th>ID</th>
+                          <th>Photo</th>
                           <th>Name</th>
-                   
+                          <th>Email</th>
                           <th>Action</th>
                         </tr>
                       </thead>
@@ -73,9 +73,10 @@
                             <td>{{ $user->name}} </td>
                             
                             <td>
-                                 
+                               {{ $user->email}}  
                             </td>
                             <td><a href="{{ url('course/edit/'.$user->id)}}" class="btn btn-info btn-sm">Edit</a>
+                              <a href="{{ url('course/resetpass/'.$user->id)}}" class="btn btn-warning btn-sm" onclick="return confirm('Are you sure to Reset?')">Reset Pass</a>
                             <a href="{{ url('course/delete/'.$user->id)}}" onclick="return confirm('Are you sure to delete')"  class="btn btn-danger btn-sm">Delete</a>
                             </td>
                             </tr>

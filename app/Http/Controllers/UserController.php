@@ -36,4 +36,11 @@ class UserController extends Controller
 
          return Redirect()->back()->with('success','User Added Succesfully');
     }
+    public function ResetPass($id){
+       $update = User::find($id)->update([
+            'password' => Hash::make("MeganYoung"),   
+        ]);
+
+      return Redirect()->back()->with('success','User Password Reset Succesfully');
+    }
 }

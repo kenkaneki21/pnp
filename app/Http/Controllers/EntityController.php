@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Entity;
 use App\Models\Family;
 use App\Models\Child;
+use App\Models\Enrollment;
 use Illuminate\Support\Carbon;
 use Auth;
 use Illuminate\Support\Str;
@@ -42,7 +43,12 @@ class EntityController extends Controller
     }
     public function EntityEdit($id){
     	$entities = Entity::find($id);
-    	 return view('admin.entity.edit',compact('entities'));
+       $courses = Enrollment::join('courses', 'enrollments.course_id', '=', 'courses.id','right')->where('enrollments.personal_id','=',$id)
+  ->select('courses.name','enrollments.id','enrollments.created_at')
+   
+   
+  ->paginate(3);
+    	 return view('admin.entity.edit',compact('entities','courses'));
 
     }
     public function EntityUpdate(Request $request ,$id){

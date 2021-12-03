@@ -371,7 +371,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">CITY/MUNICIPAL</label>
                           <div class="col-sm-9">
-                            <input class="form-control" name="per_city" id="per_cityt">
+                            <input class="form-control" name="per_city" id="per_city">
                           </div>
                         </div>
                       </div>
@@ -709,7 +709,7 @@
                   })
            });
       
-$('.tago').hide();
+
 $('#copy').val($(this).is(':checked'));
 
   $('#copy').change(function() {
